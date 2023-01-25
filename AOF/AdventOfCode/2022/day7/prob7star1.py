@@ -7,4 +7,4 @@ with open("data7.txt") as f:
         split_line = line.split()
         print(split_line)
 
-f.close()        
+f.close()
