@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "C:\\Users\\Anv\\Desktop\\PythonOnlineProblems\\AOF\\AdventOfCode\\2023\\day4"
+        }
+    ]
+}
