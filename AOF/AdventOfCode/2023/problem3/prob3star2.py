@@ -41,19 +41,6 @@ with open("data.txt") as f:
     for i in range(len(grid)):
         for j in range(len(grid[0])):            
             current_element = str(grid[i][j])
-            if current_element.isdigit():
-                list_of_numbers.append(current_element)
-                if hasSymbolAdj(i,j,grid):
-                    number_has_symbol_adj= True
-            if (current_element == '.' or not current_element.isalnum()) and list_of_numbers is not None:     
-                number_ = ''.join(list_of_numbers)
-                list_of_numbers=[] 
-                if number_has_symbol_adj:
-                    valid_numbers.append(number_)
-                    number_has_symbol_adj = False   
-                    
-                
-    valid_numbers = list(map(int,filter(None,valid_numbers)))
-    #print(valid_numbers)
-    print(sum(valid_numbers))
+            #TODO
+            
         
