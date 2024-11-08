@@ -19,7 +19,7 @@ def create_mapList(dist,src,range_):
         src = int(src) + 1
         dist = int(dist)+ 1
         src_list.append(src)
-        dist_list.append(dist)      
+        dist_list.append(dist)
     return src_list, dist_list
 
 def split_maps(maps):
