@@ -11,25 +11,25 @@ def data_preProcessing(data):
 
 def check_for_src_in_range(seed, category_lines):
     for line in category_lines: 
-        dist, src, length= line.split()
-        src, dist, length = int(src),int(dist),int(length)
+        dest, src, length= line.split()
+        src, dest, length = int(src),int(dest),int(length)
         if seed >= src and seed <= (src+length):
-            return dist, src, length
+            return dest, src, length
 
 
 def ceate_conversion_map(current_src, category_lines):
     result = check_for_src_in_range(current_src, category_lines)         
     if result is not None:
-        dist, src, length = result
-        return current_src - src + dist
+        dest, src, length = result
+        return current_src - src + dest
     return current_src
 
 def get_min_location(seed, categories):
     current_src = seed
     for ctgry_name, category_lines in categories:    
         category_lines = category_lines.strip().splitlines()
-        distination = ceate_conversion_map(current_src, category_lines)
-        current_src=distination
+        destination = ceate_conversion_map(current_src, category_lines)
+        current_src=destination
     return current_src
 
 def star1():    
