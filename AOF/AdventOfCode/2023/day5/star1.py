@@ -18,29 +18,19 @@ def check_for_src_in_range(seed, category_lines):
 
 
 def ceate_conversion_map(current_src, category_lines):
-    src_dist_map={}
     result = check_for_src_in_range(current_src, category_lines)         
     if result is not None:
         dist, src, length = result
-        for _ in range(length):
-            src_dist_map[src]=dist
-            src +=1
-            dist +=1
-    return src_dist_map
-
-def search_in_map(seed, src_dist_map):
-    return src_dist_map.get(seed,seed)
+        return current_src - src + dist
+    return current_src
 
 def get_min_location(seed, categories):
     current_src = seed
     for ctgry_name, category_lines in categories:    
         category_lines = category_lines.strip().splitlines()
-        src_dist_map = ceate_conversion_map(current_src, category_lines)
-        if src_dist_map:
-            distination=search_in_map(current_src, src_dist_map)
-            current_src=distination
+        distination = ceate_conversion_map(current_src, category_lines)
+        current_src=distination
     return current_src
-
 
 def star1():    
     data=getData()
