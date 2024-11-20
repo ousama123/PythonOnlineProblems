@@ -50,18 +50,35 @@ def star1(numbers, fixed_boards):
         
             if(board.check_bingo()):
                 print(f"Bingo board index: {board.idx}")
+                print(f"Number: {number}")
                 print(f"Score: {board.calculate_score(number)}")
                 return
+            
+def star2(numbers, fixed_boards):
+    for number in numbers:
+        for board in fixed_boards:
+            if(board.check_bingo()):
+                continue
+            for row in board.parsed_board:
+                for cell in row:
+                    if cell.value == number:
+                        cell.marked= True
+        
+            if(board.check_bingo()):
+                print(f"Bingo board index: {board.idx}")
+                print(f"Number: {number}")
+                print(f"Score: {board.calculate_score(number)}")
+                            
 
 def main():
     data=get_data()
     numbers, *boards=data.split('\n\n')
     numbers=list(map(int,numbers.split(",")))
     
-    fixed_boards=[Board(board, idx) for idx, board in enumerate(boards)]
-    star1(numbers,fixed_boards)
+    parsed_boards=[Board(board, idx) for idx, board in enumerate(boards)]
+    #star1(numbers,fixed_boards)
+    star2(numbers,parsed_boards)
 
-    #print([ele.value for ele in board.parsed_board if ele.marked])
 
 if __name__=="__main__":
     main()
