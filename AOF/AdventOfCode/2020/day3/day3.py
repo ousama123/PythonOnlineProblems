@@ -1,5 +1,11 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+FILE_PATH = os.getenv('FILE_PATH')
+
 def get_data():
-    with open('C:\\Users\\oussama.anadani\\Desktop\\PythonOnlineProblems\\AOF\\AdventOfCode\\2020\\day3\\data.txt') as f:
+    with open(FILE_PATH) as f:
         return f.read()
 
 def count_trees(grid):
