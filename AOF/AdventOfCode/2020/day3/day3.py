@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 import os
-
+import math
+ 
 load_dotenv()
 FILE_PATH = os.getenv('FILE_PATH')
 
@@ -8,29 +9,45 @@ def get_data():
     with open(FILE_PATH) as f:
         return f.read()
 
-def count_trees(grid):
-    trs_count=0
-    col_idx = 3
-    for r_idx, row in enumerate(grid.splitlines()):
-        if(r_idx == 0):
-            continue
-        
-        value = row[col_idx]
-        if value == '#':
-            trs_count +=1
-        
-        col_idx +=3
+def slope(grid, right, down):
+    trees_count=0
+    right_step=right
+    rows = grid.splitlines()
 
-        if col_idx >= len(row):
-            col_idx -= len(row)
-            
-    return trs_count
+    for r_idx in range(0, len(rows), down):
+        row = rows[r_idx]
+        value = row[right_step]
+
+        if r_idx == 0:
+            continue
+
+        if value == '#':
+            trees_count +=1
+
+        right_step +=right
+
+        if right_step >= len(row):
+            right_step -= len(row)
+    
+    return trees_count
+        
 
 def main():
-    data = get_data()
-    #print(data)
-    trs_count=count_trees(data)
-    print(trs_count)
+    moves = [
+        (1, 1), 
+        (3, 1), 
+        (5, 1),  
+        (7, 1), 
+        (1, 2)   
+    ]
+
+    grid = get_data()
+    #part1_trees_num=slope(grid, 3,1)
+    #print(part1_trees_num)
+
+    #part2
+    slops=[slope(grid,right,down) for right, down in moves]
+    print(math.prod(slops))
 
    
 if __name__ == "__main__":

@@ -19,6 +19,7 @@ logs/
 # Virtual environments
 venv/
 env/
+.venv/
 
 # Python egg files
 *.egg-info/
