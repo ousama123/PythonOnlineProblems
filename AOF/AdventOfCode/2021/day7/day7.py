@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import statistics
  
 load_dotenv()
 FILE_PATH = os.getenv('FILE_PATH')
@@ -10,17 +11,13 @@ def get_data():
         return f.read()
     
 def part1(positions):
-    positions = sorted(positions)
     pos_sum=0
     fuel_sums=[]
-    #TODO update to median value instead
     for pos in positions:
-        pos_sum=0
-        for pos2 in positions:
-            pos_sum+= abs(pos2 - pos)
-        fuel_sums.append(pos_sum)
+        pos_sum+= abs(statistics.median(positions) - pos)
+    fuel_sums.append(pos_sum)
 
-    return fuel_sums
+    return min(fuel_sums)
 
 def part2(positions):
     step = 0 
@@ -50,8 +47,9 @@ def part2(positions):
 def main():
     data=get_data()
     positions=list(map(int,data.split(',')))
+    positions = sorted(positions)
     fuel_sums=part1(positions)
-    print(min(fuel_sums))
+    print(int(fuel_sums))
     #part2(positions)
    
 if __name__ == "__main__":
