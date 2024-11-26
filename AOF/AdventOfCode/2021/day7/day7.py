@@ -21,21 +21,19 @@ def part1(positions):
     return min(fuel_sums)
 
 def part2(positions):
-    #mean_value = statistics.mean(positions)
-    lowest_mean, highest_mean = positions[0], positions[-1]
+    lowest_pos, highest_pos = positions[0], positions[-1]
     all_fuel_costs = 0
-    all_fule_costs_with_different_means = []
-    for mean_val in range(lowest_mean, highest_mean+1):
+    all_fule_costs_with_different_positions = []
+    for pos2 in range(lowest_pos, highest_pos+1):
         all_fuel_costs=0
         for pos in positions:
-            dist=abs(mean_val - pos)
+            dist=abs(pos2 - pos)
             fuel_cost = (dist * (dist + 1)) // 2
             all_fuel_costs += fuel_cost
         
-        all_fule_costs_with_different_means.append((all_fuel_costs))
+        all_fule_costs_with_different_positions.append((all_fuel_costs))
 
-    print(min(all_fule_costs_with_different_means))
-            
+    print(min(all_fule_costs_with_different_positions))            
             
 def main():
     data=get_data()
