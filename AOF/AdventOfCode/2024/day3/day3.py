@@ -20,23 +20,32 @@ def part1(data):
         num1= int(re.findall(r'[0-9]{1,3}', left)[0])
         num2= int(re.findall(r'[0-9]{1,3}', right)[0])
         sum_nums += num1 * num2
+        
     print(sum_nums)
 
 def part2(data):
-    data=str(data)
-    dos = ""
+    data = str(data)
+    start_word = 'do()'
+    end_word = "don't()"
     start = 0
-    end = len(data)
+    dos=""
+    data =f"{start_word}{data}"
 
     while start < len(data):
-        end=data.find('don\'t()')
-        while end != -1:
+        start = data.find(start_word, start)
+        if start == -1: #if we dont find a start word
+            break
+        
+        end = data.find(end_word, start)
+        if end == -1: #if wee dont find an end word
+            end=len(data)
             dos += data[start:end]
-            start = end + len("don't()")
-            end = len(data[start:len(data)])
-    
-    print(dos)
+            break
 
+        dos += data[start:end]
+        start = end + len(end_word)
+    
+    part1(dos)
 
 def main():
     data=get_data()
