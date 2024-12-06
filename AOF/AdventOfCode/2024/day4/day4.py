@@ -7,7 +7,7 @@ FILE_PATH = os.getenv('FILE_PATH')
 FILE_PATH_DEBUG = os.getenv('FILE_PATH_DEBUG')
 
 def get_data():
-    with open(FILE_PATH) as f:
+    with open(FILE_PATH_DEBUG) as f:
         return f.read()
 
 def get_grid(data):
@@ -69,27 +69,18 @@ def part2(data):
     cnt = 0
     for r in range(len(data)):    
         for c in range(len(data[0])):
-            if data[r][c] == 'M':
+            if data[r][c] == 'A':
                 up_left, up_right, down_left, down_right  = "", "", "", ""
 
-                if c-2 >= 0 and r-2 >= 0:
-                    up_left=''.join([data[r-i][c-i] for i in range(3)])
-                if c+2 < len(data[0]) and r-2 >= 0:
-                    up_right = ''.join([data[r-i][c+i] for i in range(3)])
-                if c-2 >= 0 and r+2 < len(data):
-                    down_left = ''.join([data[r+i][c-i] for i in range(3)])
-                if r+2 < len(data) and c + 2 < len(data[0]):
-                    down_right = ''.join([data[r+i][c+i] for i in range(3)])
- 
-                if up_left==word:
-                    cnt +=1
-                if up_right==word:
-                    cnt +=1
-                if down_left==word:
-                    cnt +=1
-                if down_right==word:
-                    cnt +=1
+                if c-1 >= 0 and r-1 >= 0 and c+1 < len(data[0]) and r+1 < (len(data)):
+                    up_left=''.join([data[r-1][c-1]+ data[r][c]+ data[r+1][c+1]])
 
+                if c-1 >= 0 and r+1 < len(data) and r-1 >=0 and c+1 < len(data[0]):
+                    down_left = ''.join([data[r+1][c-1] +data[r][c] +data[r-1][c+1] ])
+ 
+                if up_left in (word , word_reverse) and down_left in (word , word_reverse):
+                    cnt +=1
+                    
     print(cnt)
 
 def main():
