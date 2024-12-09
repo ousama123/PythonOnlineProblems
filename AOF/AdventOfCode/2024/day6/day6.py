@@ -25,39 +25,40 @@ def turn_90_deg(current_state):
 
 def move_forward(grid, i, j):
     current_state = grid[i][j]
-    steps = 1
-    while j < len(grid[0]) and i < len(grid):
+    steps = 0
+
+    while 0 <= i < len(grid) and 0 <= j < len(grid[0]):
         if current_state == '<':
-            while grid[i][j-1] !='#' and j>0:
+            while j-1>0 and grid[i][j-1] !='#' :
                 current_state = grid[i][j-1]
                 steps +=1
                 j = j-1
-            grid[i][j] = turn_90_deg('<')
-            current_state = grid[i][j]
+            #grid[i][j] = turn_90_deg('<')
+            current_state = turn_90_deg('<')
 
         elif current_state == '^':
-            while grid[i-1][j] !='#' and i>0:
+            while i-1>0 and grid[i-1][j] !='#' :
                 current_state = grid[i-1][j]
                 steps +=1
                 i = i-1
-            grid[i][j] = turn_90_deg('^')
-            current_state = grid[i][j]
+            #grid[i][j] = turn_90_deg('^')
+            current_state = turn_90_deg('^')
 
         elif current_state == '>': 
-            while grid[i][j+1] !='#' and j<len(grid[0]):
+            while j+1<len(grid[0]) and grid[i][j+1] !='#' :
                 current_state = grid[i][j+1]
                 steps +=1
                 j = j+1
-            grid[i][j] = turn_90_deg('>')
-            current_state = grid[i][j]
+            #grid[i][j] = turn_90_deg('>')
+            current_state = turn_90_deg('>')
 
         elif current_state == 'v': 
-            while grid[i+1][j] !='#' and i<len(grid):
+            while i+1<len(grid) and grid[i+1][j] !='#' :
                 current_state = grid[i+1][j]
                 steps +=1
                 i = i+1
-            grid[i][j] = turn_90_deg('v')
-            current_state = grid[i][j]
+            #grid[i][j] = turn_90_deg('v')
+            current_state = turn_90_deg('v')
     
     print(steps)
     
@@ -65,16 +66,14 @@ def move_forward(grid, i, j):
 def main():
     data=get_data()
     grid = []
-    steps=0
+
     for line in data.splitlines():
-        line = list(line)
-        grid.append(line)
+        grid.append(list(line))
 
     for i in range(len(grid)):
         for j in range(len(grid[0])):
-            current_state = grid[i][j]
-            if current_state in ('<' , '^' , '>' , 'v'):
-                move_forward(grid, i, j)
+            if grid[i][j] in ('<', '^', '>', 'v'):
+                move_forward(grid, i, j) 
                 return
         
 
