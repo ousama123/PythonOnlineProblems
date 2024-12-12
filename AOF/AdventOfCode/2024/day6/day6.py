@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 import os
-import re
 
 load_dotenv()
 FILE_PATH = os.getenv('FILE_PATH')
@@ -27,7 +26,7 @@ def move_forward(grid, i, j):
     current_state = grid[i][j]
     steps = 0
 
-    while 0 <= i < len(grid) and 0 <= j < len(grid[0]):
+    while 0 <= i <= len(grid) and 0 <= j <= len(grid[0]):
         if current_state == '<':
             while j-1>0 and grid[i][j-1] !='#' :
                 current_state = grid[i][j-1]
@@ -59,8 +58,12 @@ def move_forward(grid, i, j):
                 i = i+1
             #grid[i][j] = turn_90_deg('v')
             current_state = turn_90_deg('v')
+        else:
+            print(steps)
+            break
     
     print(steps)
+    return
     
 
 def main():
